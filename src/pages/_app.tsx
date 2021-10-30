@@ -2,7 +2,8 @@ import React from 'react';
 import type { AppProps } from 'next/app';
 import GlobalStyles from '../components/GlobalStyles';
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+function Blog({ Component, pageProps }: AppProps) {
   return (
     <div>
       <GlobalStyles />
@@ -10,5 +11,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </div>
   );
 }
-
-export default MyApp;
+export default Blog;

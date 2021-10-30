@@ -1,7 +1,7 @@
 {
   "name": "next-typescript-twin-styled-eslint-starter",
   "version": "1.0.0",
-  "author": "Yahiaoui Mehdi Abderrahmane",
+  "author": "Vincent Nguyen @vinhvn",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,15 +11,19 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "next": "11.0.1",
+    "@sanity/block-content-to-react": "^3.0.0",
+    "@sanity/client": "^2.21.7",
+    "@sanity/image-url": "^1.0.1",
+    "next": "12.0.1",
+    "next-seo": "^4.28.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@types/node": "^16.3.3",
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.9",
-    "@types/styled-components": "^5.1.11",
+    "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "babel-plugin-macros": "^3.1.0",
@@ -36,6 +40,7 @@
     "prettier": "^2.3.2",
     "prettier-eslint": "^12.0.0",
     "react-is": "^17.0.2",
+    "sanity-codegen": "^0.9.6",
     "styled-components": "^5.3.0",
     "tailwindcss": "^2.2.4",
     "twin.macro": "^2.6.2",

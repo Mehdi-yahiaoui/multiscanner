@@ -1,0 +1,33 @@
+{
+    "lang-name":{
+          "ar":{"code":"ع",
+           "value":  "العربية"},
+        "en":{"code":"en","value":"English"}
+    },
+    "switcher":{
+        "label":"select your language"
+    },
+   "search":{
+        "label":"search", 
+        "placeholder":"try 'linguistics'...",
+        "submit":{
+            "value":"submit your search"
+        }
+    },
+    "nav":{
+        "ariaLabel":"MultiScanner Home page",
+              "skipNav":" Skip navigation links",
+        "links":{
+            "home":{
+                "label":"home"
+            },
+            "categories":{
+                "label":"categories"
+            },
+            "about":{
+                "label":"about"
+            }
+        }
+    }
+
+}

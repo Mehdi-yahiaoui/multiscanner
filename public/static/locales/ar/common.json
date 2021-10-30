@@ -1,0 +1,34 @@
+{
+    "lang-name":{
+        "ar":{"code":"ع",
+           "value":  "العربية"},
+        "en":{"code":"en","value":"English"}
+    },
+"switcher":{
+        "label":"khayar la langue"
+    },
+    "search":{
+        "label":"بحث", 
+        "placeholder":"جرب ''نصائح للدراسة'' ...",
+        "submit":{
+            "value":"تقديم البحث"
+        }
+    },
+    "nav":{
+         "ariaLabel":"الصفحة الرئيسية MultiScanner",
+
+           "skipNav":"تخطي روابط التنقل",
+        "links":{
+            "home":{
+                "label":"الرئيسية"
+            },
+            "categories":{
+                "label":"الفئات"
+            },
+            "about":{
+                "label":"نبذة عنا"
+            }
+        }
+    }
+    
+}
