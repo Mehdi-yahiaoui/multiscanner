@@ -1,0 +1,23 @@
+{ 
+    "logo-label":"{{siteName}} blog logo",
+    "nav":{
+        "welcome":"{{siteName}} {{page}} page",
+        "home":"home",
+        "categories":"categories",
+        "about":"about"
+    },
+    "buttons":{
+        "skip-to":"Skip to {{content}}",
+        "search":"submit your search",
+        "menu-toggle":{
+            "false":"open the navigation menu",
+            "true":"close the navigation menu"
+        },
+        "clear-search":"clear yout search"
+    },
+    "search":{
+        "label":"search",
+        "placeholder":"Try searching for {{value}}"
+        
+    }
+}

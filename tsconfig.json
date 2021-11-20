@@ -20,7 +20,9 @@
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["styles/*"],
       "@/lib/*": ["lib/*"],
-      "@/typings/*": ["typings/*"]
+      "@/typings/*": ["typings/*"],
+      "@/context/*": ["context/*"],
+      "@/hooks/*": ["hooks/*"],
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

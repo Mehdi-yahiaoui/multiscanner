@@ -1,0 +1,22 @@
+{
+    "site-name":"مالتي سكانر",
+    "change-arabic": "تغيير اللغة إلى العربية ",
+    "change-english": "تغيير اللغة إلى اللغة الإنجليزية ",
+    "language":{
+        "ar":{
+            "label":"العربية",
+            "code":"ar"
+        },
+        "en":{
+            "label": " الإنجليزية", 
+            "code":"en"
+        },
+        "current":"{{lang}} اللغة الحالية"
+    },
+    "language-switcher":"اختار اللغة",
+    "lang-switcher":"محوّل اللغة",
+    "main-content":"المحتوى الرئيسي", 
+     "modal":{
+        "open":"open {{target}} modal"
+    }
+}

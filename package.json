@@ -8,16 +8,26 @@
     "start": "next start",
     "export": "next export -o dist",
     "stage": "yarn build; yarn start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write"
   },
+  "target": "es2018",
   "dependencies": {
+    "@radix-ui/react-portal": "^0.1.1",
+    "@radix-ui/react-tooltip": "^0.1.1",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.21.7",
     "@sanity/image-url": "^1.0.1",
+    "focus-trap-react": "^8.8.2",
     "next": "12.0.1",
+    "next-i18next": "^8.9.0",
     "next-seo": "^4.28.1",
+    "next-translate": "^1.1.1",
+    "path": "^0.12.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-avatar": "^3.10.0",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@types/node": "^16.3.3",
@@ -26,6 +36,7 @@
     "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
+    "accessibility-checker": "^3.1.11",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-styled-components": "^1.13.2",
     "eslint": "^7.30.0",

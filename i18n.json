@@ -1,0 +1,10 @@
+{
+  "locales": ["en", "ar"],
+  "defaultLocale": "en",
+
+  "pages": {
+    "*": ["common", "layout"],
+    "/": ["common"],
+    "post/[slug]":["post"]
+  }
+}

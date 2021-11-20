@@ -1,0 +1,22 @@
+{
+    "logo-label":" شعار المدونة {{siteName}} ",
+    "nav":{
+        "home":"الرئيسية",
+        "categories":"الفئات",
+        "about":"نبذة عنا"
+    },
+    "buttons":{
+        "skipt-to":" تخطي إلى {{content}}",
+         "search":"البحث",
+         "menu-toggle":{
+             "false":"فتح قائمة التنقل",
+             "true":"غلق قائمة التنقل"
+         },
+         "clear-search":"امسح البحث"
+    },
+    "search":{
+        "label":"البحث",
+        "placeholder":"حاول البحث عن {{value}}"
+    }
+  
+}

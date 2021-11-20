@@ -1,0 +1,22 @@
+{
+    "site-name":"MultiScanner",
+    "change-arabic": "Change language to Arabic",
+    "change-english": "Change language to English",
+    "language":{
+        "ar":{
+            "label": "Arabic",
+            "code":"ar"
+        },
+        "en":{
+            "label": "English",
+            "code":"en"
+        },
+        "current":"current language {{lang}}"
+    },
+    "language-switcher":"select your language",
+    "lang-switcher":"language switcher",
+    "main-content":"main content",
+    "modal":{
+        "open":"open {{target}} modal"
+    }
+}
