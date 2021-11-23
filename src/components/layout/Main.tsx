@@ -1,9 +1,16 @@
-import { createRef, forwardRef, HTMLProps, ReactElement, useEffect } from 'react';
+import {
+  createRef,
+  forwardRef,
+  HTMLProps,
+  ReactElement,
+  useEffect
+} from 'react';
 import { NavBar } from '../navbar';
 import { useDirection } from 'hooks/useDirection';
 import { Header } from '@/components/header';
 import 'twin.macro';
 import tw, { css, styled } from 'twin.macro';
+import Head from 'next/head';
 
 export function MainLayout({
   children
@@ -11,12 +18,20 @@ export function MainLayout({
   const { direction } = useDirection();
   useEffect(() => {
     // @ts-ignore
-    return ()=> document.querySelector('html').setAttribute("dir", direction)
-  }, [direction])
+    return () => document.querySelector('html').setAttribute('dir', direction);
+  }, [direction]);
   const mainContentRef = createRef<any>();
   const langRef = createRef<any>();
   return (
     <LayoutContainer id="layout" dir={direction}>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&family=Open+Sans:wght@300&family=Roboto:wght@300&family=Tajawal&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <NavBar langRef={langRef} mainContentRef={mainContentRef} />
       <Header langRef={langRef} />
       <MainComponent ref={mainContentRef} tw="grid-area[main] w-full mt-16 ">
@@ -50,13 +65,13 @@ const LayoutContainer = styled.div(() => [
   `
 ]);
 
-interface IContentProps extends React.HTMLProps<HTMLElement> {}
-const MainComponent = forwardRef<HTMLElement, IContentProps>(
+interface IContentProps extends React.HTMLProps<HTMLDivElement> {}
+const MainComponent = forwardRef<HTMLDivElement, IContentProps>(
   ({ children, ...rest }, ref) => {
     return (
-      <main ref={ref} tw="grid-area[main] w-full" {...rest}>
+      <div id="page-content" ref={ref} tw="grid-area[main] w-full" {...rest}>
         {children}
-      </main>
+      </div>
     );
   }
 );

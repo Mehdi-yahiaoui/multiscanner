@@ -1,14 +1,12 @@
 import { useMenu } from 'hooks/useMenu';
 import useTranslation from 'next-translate/useTranslation';
-import {  Component, ComponentType, Ref, RefObject } from 'react';
+import { Ref, RefObject } from 'react';
 import 'twin.macro';
 import tw, { styled } from 'twin.macro';
 
 interface Props {
   mainContentRef: RefObject<any>;
 }
-
-
 export const SkipNavigation = ({ mainContentRef }: Props) => {
   const { t } = useTranslation();
   const { toggle } = useMenu();

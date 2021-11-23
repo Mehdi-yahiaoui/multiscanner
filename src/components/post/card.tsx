@@ -1,102 +1,111 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { buildImage } from '@/lib/imageBuilder.sanity';
-
 import 'twin.macro';
+import { TPosts, TTag } from '@/typings/schema.types';
+import { Author } from '../author';
+import Skeleton from 'react-loading-skeleton';
+import tw from 'twin.macro';
+export default function Card(post: TPosts): JSX.Element {
+  return <Article {...post} />;
+}
 
-type CardProps = {
-  title?: string;
-  mainImage?: any;
-  description?: string;
-  publishedAt?: string;
-  slug?: string;
-};
+function Article(post: TPosts) {
+  const {
+    title,
+    slug,
+    author: {
+      name,
+      picture: { url: authorImage }
+    },
+    coverImage: { url: coverImage },
+    publishedAt,
+    excerpt,
+    tag
+  } = post;
 
-export default function Card({
-  title = '',
-  mainImage = '',
-  description = '',
-  publishedAt = String(new Date()),
-  slug
-}: CardProps): JSX.Element {
-  const publicationDate = new Date(publishedAt).toLocaleDateString();
-  const image = buildImage(mainImage.asset);
+  console.log(post.tag[0]);
   return (
     <article
-      style={{ position: 'relative' }}
+      itemScope
+      itemType="http://schema.org/Article"
       id={slug}
       tabIndex={0}
-      tw=" rounded-md  ring-1 ring-divider outline-none  bg-secondary w-full  sm:max-w-xl  relative  focus:(ring-2 ring-purple-400) "
+      tw=" rounded-md  ring-1 ring-divider outline-none  bg-secondary w-full  sm:max-w-xl  relative  focus:(ring-2 ring-purple-400) text-white"
     >
-      <header>
-        <div
-          tw="relative h-60 w-full "
-          itemScope
-          itemType="https://schema.org/Article"
-        >
-          <Link href={`/post/${slug}`}>
-            <a
-              tabIndex={0}
-              tw=" rounded-md h-full w-full p-2 outline-none block overflow-hidden  focus:(ring-2  ring-purple-400)  relative"
-            >
-              <Image
-                alt={`image for ${title}`}
-                src={image.width(300).height(250).url()}
-                layout="fill"
-                objectFit="cover"
-              />
-            </a>
-          </Link>
-        </div>
-        <div tw="flex flex-row p-3 space-x-1">
-          <span
-            tabIndex={0}
-            tw="h-10 w-10 rounded-full inline-block outline-none focus:(ring-2  ring-purple-400)"
-          >
-            <img
-              tw="h-full w-full rounded-full"
-              aria-hidden
-              src={image.width(40).height(40).url()}
-              alt="Yahiaoui A. Mehdi"
+      <section>
+        <div tw="relative h-60 w-full ">
+          <span tw=" rounded-t-md block h-full w-full p-2   overflow-hidden    relative">
+            <Image
+              alt={`image for ${title}`}
+              src={coverImage}
+              layout="fill"
+              objectFit="cover"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           </span>
-          <div tw="flex flex-col text-sm">
-            <span itemProp="author">
-              <h3
-                tabIndex={0}
-                tw="outline-none text-gray-100 focus:(ring-2  ring-purple-400 rounded-sm)"
-              >
-                <span tw="sr-only">author:</span>Yahiaoui A. Mehdi
-              </h3>
-            </span>
-            <time
-              tabIndex={0}
-              dateTime={publishedAt}
-              tw="outline-none text-gray-400 focus:(ring-2  ring-purple-400 rounded-sm)"
-            >{`${publicationDate}`}</time>
-          </div>
         </div>
-        <h2 tw="ml-14 mr-14 text-gray-200 font-bold text-xl font-mono capitalize">
-          <Link href={`/post/${slug}`}>
-            <a
-              tabIndex={0}
-              tw="outline-none hover:(text-purple-400) focus:(ring-2  ring-purple-400 rounded-sm)"
-            >
-              {title}
-            </a>
-          </Link>
-        </h2>
-      </header>
+        <header tw="mb-4">
+          <div tw="flex flex-row p-3 space-x-1">
+            <Author
+              name={name}
+              image={authorImage}
+              imageSize="sm"
+              time={publishedAt}
+            />
+          </div>
+          <h2 tw="ml-14 mr-14 text-gray-200 font-bold text-xl  capitalize outline-none hover:(text-purple-400) focus:(text-purple-400)  ">
+            <Link href={`/post/${slug}`}>
+              <a>{title || <Skeleton />}</a>
+            </Link>
+          </h2>
+        </header>
+      </section>
       <section
-        aria-label="description"
-        tabIndex={0}
-        tw="w-full h-full outline-none focus:(ring-2  ring-purple-400 rounded-md)"
+        aria-labelledby="description"
+        tw="w-full h-full mb-4 outline-none focus:(ring-2  ring-purple-400 rounded-md)"
       >
-        <p  tabIndex={0} tw="ml-14 mr-14 text-lg text-white line-height[2em]">
-          {description}
+        <p
+          aria-label="description"
+          id="description"
+          itemProp="abstract"
+          tw="ml-14 mr-14 text-lg font-light text-white line-height[1.5em] "
+        >
+          {excerpt}
         </p>
+      </section>
+      <section id="tags" tw="flex h-16 items-center px-5">
+        <span aria-hidden tw="sr-only">
+          List of tags
+        </span>
+        <ul>
+          <Tag tag={tag} />
+        </ul>
       </section>
     </article>
   );
 }
 
+const Tag = ({ tag }: { tag: TTag[] }) => (
+  <>
+    {tag.map(({ name, colour }) => (
+      <li
+        itemProp="keywords"
+        key={name}
+        css={[
+          `background-color:rgba(${colour.rgba?.r}, ${colour.rgba?.g}, ${colour.rgba?.b}, var(--tw-bg-opacity)); border:1px solid rgba(${colour.rgba?.r}, ${colour.rgba?.g}, ${colour.rgba?.b}, var(--tw-border-opacity)); `,
+          tw`bg-opacity-5 border-opacity-10  p-0.5 rounded-md shadow   hover:(bg-opacity-10 border-opacity-40) `
+        ]}
+      >
+        <span
+          style={{
+            color: `rgb(${colour.rgba?.r}, ${colour.rgba?.g}, ${colour.rgba?.b})`
+          }}
+        >
+          #
+        </span>
+        {name}
+      </li>
+    ))}{' '}
+  </>
+);

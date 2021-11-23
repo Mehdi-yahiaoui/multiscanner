@@ -5,8 +5,6 @@ import GlobalStyles from '../components/GlobalStyles';
 import { MenuProvider } from 'context/menu.context';
 import { ModalProvider } from '@/context/modal.context';
 
-
-
 function Blog({ Component, pageProps }: AppProps) {
   return (
     <>

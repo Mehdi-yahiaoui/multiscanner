@@ -1,7 +1,4 @@
-import React, {
-  ComponentType,
-  Component,
-} from 'react';
+import React, { ComponentType, Component } from 'react';
 import tw from 'twin.macro';
 
 /**
@@ -19,7 +16,7 @@ interface WithBadgeProps {
 
 export function withBadge(
   options: WithBadgeProps,
-  Badge: ComponentType<any>
+  Badge: any
 ): <P extends object>(WrappedComponent: ComponentType<P>) => ComponentType<P> {
   return <P extends object>(WrappedComponent: ComponentType<P>) =>
     class BadgedComponent extends Component<P> {

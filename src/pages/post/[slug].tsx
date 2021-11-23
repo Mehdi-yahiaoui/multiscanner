@@ -1,97 +1,90 @@
-import { Post } from '@/typings/schema.types';
-import sanity from '@/lib/sanityClient';
-import { GetServerSideProps, GetStaticPaths } from 'next';
-import { postQuery, postSlugsQuery } from '@/lib/queries';
-import { buildImage } from '@/lib/imageBuilder.sanity';
-import BlockContent from '@sanity/block-content-to-react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { MainLayout } from '@/components/layout/Main';
-import Link from 'next/link';
+import { IPost } from '@/typings/schema.types';
 import Image from 'next/image';
-import I18nProvider from 'next-translate/I18nProvider'
-import useTrasnlation from "next-translate/useTranslation"
-import "twin.macro"
 
-interface Props {
-  post: Post;
-}
+import { getPostBySlug, getPosts } from 'services';
+import { ParsedUrlQuery } from 'querystring';
+import { RichText } from '@graphcms/rich-text-react-renderer';
+
+import 'twin.macro';
+import { Author } from '@/components/author';
+
 export default function BlogPost({ post }: Props) {
-  const { lang } = useTrasnlation();
   return (
     <MainLayout>
-      <I18nProvider lang={lang}>
-        <div
-        tw="mt-10"
-        ></div>
-      <Article post={post} />
-    </I18nProvider>
+      <main tw="relative m-1 shadow sm:w-full sm:max-w-3xl rounded-md bg-secondary">
+        <Article post={post} />
+      </main>
     </MainLayout>
   );
 }
-function Article({ post }:Props) {
-  const {body, mainImage, title, } = post
+function Article({ post }: Props) {
+  const {
+    title,
+    coverImage: { url },
+    content: { raw },
+    publishedAt,
+    author: {
+      name,
+      picture: { url: authorImage }
+    }
+  } = post;
 
   return (
-
-     <article tw="relative w-96 rounded-md bg-secondary" >
-      <header >
-        <figure>
-          {/* @ts-ignore */}
-          <Image
-            src={buildImage(mainImage!.asset._ref).width(400).height(300).url()}
-            height="300"
-            width="400"
-          />
+    <article tw="text-white" itemScope itemType="http://schema.org/Article">
+      <header tw="overflow-hidden">
+        <figure tw="w-full h-72 relative overflow-hidden rounded-t-md ">
+          <Image src={url} layout="fill" objectFit="cover" />
+          <figcaption>hello world</figcaption>
         </figure>
-        <h1>{title}</h1>
-        <div></div>
+        <div tw="p-6 mb-6">
+          <Author
+            name={name}
+            image={authorImage}
+            imageSize="lg"
+            time={publishedAt}
+          />
+        </div>
+
+        <h1 itemProp="headline" tw="pr-6 pl-6 text-3xl font-bold">
+          {title}
+        </h1>
       </header>
-      <section id="blog-content">
-        <BlockContent blocks={body} serializers={serializers} />
+      <section
+        itemProp="articleBody"
+        id="blog-content"
+        tw="p-5 font-family['-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif']"
+      >
+        <RichText content={raw} />
       </section>
-      </article>
-  )
+    </article>
+  );
 }
-type serializersLink = {
-  mark: any;
-  children: any;
-};
-const serializers = {
-  marks: {
-    internalLink: ({ mark, children }: serializersLink) => {
-      const { slug = {} } = mark;
-      const href = `/post/${slug.current}`;
-      return (
-        <Link href={href}>
-          <a>{children}</a>
-        </Link>
-      );
-    },
-    link: ({ mark, children }: serializersLink) => {
-      const { blank, href } = mark;
-      return blank ? (
-        <a href={href} target="_blank" rel="noopener">
-          {children}
-        </a>
-      ) : (
-        <a href={href}>{children}</a>
-      );
-    }
-  }
+
+type Props = {
+  post: IPost;
 };
 
-export const getStaticProps: GetServerSideProps = async ({ params }) => {
-  const { post }: Props = await sanity.fetch(postQuery, {
-    slug: params?.slug
-  });
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams;
+  const { post } = await getPostBySlug(slug);
   return {
-    props: { post }
+    props: {
+      post
+    }
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await sanity.fetch(postSlugsQuery);
+  const { posts } = await getPosts();
+  const paths = posts.map(({ slug }: IPost) => ({ params: { slug } }));
+
   return {
-    paths: paths.map((slug: string) => ({ params: { slug } })),
-    fallback: true
+    paths: paths,
+    fallback: 'blocking'
   };
 };

@@ -36,7 +36,7 @@ export function NavBar({ mainContentRef, langRef }: Props) {
         <Button.Toggle />
       </div>
       <div
-        tw="relative h-full bg-primary"
+        tw="relative h-full bg-primary "
         css={!toggle ? tw`hidden ` : tw`left-0`}
       >
         <div tw="flex  w-16 sm:w-20 justify-between h-full  flex-col transition-all">
@@ -54,6 +54,7 @@ export function NavBar({ mainContentRef, langRef }: Props) {
               ))}
             </ul>
           </nav>
+          <span aria-hidden="true" />
         </div>
       </div>
     </div>
@@ -71,6 +72,7 @@ const NavLink = ({ route, label, icon }: ILink) => {
           aria-label={t(`layout:nav.${label}`)}
           aria-current={activeRoute && 'page'}
           tabIndex={0}
+          title={label}
           css={[
             tw`flex  cursor-pointer rounded-md items-center justify-center h-full w-full  hover:bg-secondary hover:bg-opacity-60 focus:outline-none  focus:ring  focus:ring-purple-300 `,
 

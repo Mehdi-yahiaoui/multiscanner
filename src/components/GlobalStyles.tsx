@@ -4,11 +4,15 @@ import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 
 const CustomStyles = createGlobalStyle`
 
-@font-face{
-  font-family: Roboto; 
-  font-weight:400;
-  src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+html[lang="en"]{
+  font-family:'Roboto', sans-serif;
 }
+html[lang="ar"]{
+font-family: 'Cairo', sans-serif;
+  font-weight:normal;
+}
+
+
 *{
 ::-webkit-scrollbar {
     width: 12px;

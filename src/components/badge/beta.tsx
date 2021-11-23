@@ -7,7 +7,7 @@ export function Beta() {
   return (
     <Tooltip.Root>
       <Tooltip.Trigger tw="focus:(ring-2 ring-blue-300) outline-none rounded-full">
-        <div tw=" h-6 w-6 p-0 -top-2.5 bg-blue-500 text-yellow-400 flex items-center justify-center rounded-full cursor-pointer">
+        <div tw=" h-6 w-6 p-0 -top-2.5  text-yellow-400 flex items-center justify-center rounded-full cursor-pointer">
           <BiTestTube size="16" tw="filter" />
         </div>
       </Tooltip.Trigger>
